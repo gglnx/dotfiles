@@ -18,20 +18,25 @@ HIST_STAMPS="dd.mm.yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Cache directory
+ZSH_COMPDUMP="${HOME}/.cache/zsh/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+
+# English, please
+export LANG=en_US.UTF-8
+
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 # Preferred editor for local and remote sessions
 export EDITOR='nano'
 
 # Use exa as ls replacement
-alias ls="exa"
+alias ls="exa -la"
 alias la="exa -la"
 alias ll="exa -la"
+
+# Reload zsh
+alias zshreload="source ~/.zshrc"
 
 # Local bin
 export PATH="/usr/local/bin:$PATH"
@@ -50,3 +55,7 @@ export PATH="./vendor/bin:./node_modules/.bin:$PATH"
 
 # yarn global bin
 export PATH="$PATH:`yarn global bin`"
+
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

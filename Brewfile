@@ -6,7 +6,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "bramstein/webfonttools"
-tap "twpayne/taps"
 
 # Brews
 brew "zsh"
@@ -14,8 +13,7 @@ brew "python@2", link: true
 brew "ansible"
 brew "php@7.2", link: true
 brew "composer"
-brew "libssh2"
-brew "curl", args: ["with-libssh2"]
+brew "curl"
 brew "exa"
 brew "ffmpeg"
 brew "flac"
@@ -37,7 +35,6 @@ brew "wp-cli"
 brew "youtube-dl"
 brew "bramstein/webfonttools/sfnt2woff"
 brew "bramstein/webfonttools/woff2"
-brew "twpayne/taps/chezmoi"
 brew "coreutils"
 brew "automake"
 brew "autoconf"
@@ -47,6 +44,8 @@ brew "readline"
 brew "libxslt"
 brew "libtool"
 brew "unixodbc"
+brew "node@10"
+brew "yarn"
 
 # Casks
 cask "1password"
@@ -54,14 +53,11 @@ cask "bartender"
 cask "coconutbattery"
 cask "colour-contrast-analyser"
 cask "cyberduck"
-cask "firefox", args: ["language=de"]
+cask "firefox", args: { language: "de" }
 cask "firefox-developer-edition"
-cask "firefox-beta"
 cask "firefox-nightly"
 cask "flux"
 cask "google-chrome"
-cask "google-chrome-dev"
-cask "google-chrome-beta"
 cask "google-chrome-canary"
 cask "imageoptim"
 cask "iterm2"
@@ -86,7 +82,10 @@ cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
 cask "colorsnapper"
+cask "notion"
+cask "contexts"
 cask "microsoft-office"
+cask "microsoft-teams"
 
 # Apps
 mas "Agenda", id: 1287445660
@@ -94,7 +93,6 @@ mas "Battery Indicator", id: 1206020918
 mas "PDF Letterhead Lite", id: 976548033
 mas "Sim Daltonism", id: 693112260
 mas "Telephone", id: 406825478
-mas "Xcode", id: 497799835
 
 # Fonts
 cask "font-barlow"

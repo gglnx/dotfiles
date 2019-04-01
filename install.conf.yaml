@@ -1,11 +1,15 @@
 - defaults:
     link:
       relink: true
+      force: true
 
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore
+    ~/.asdfrc: asdfrc
+
+- shell:
+    - [mkdir -p ~/.cache/zsh/, Create Cache directory for ZSH]
