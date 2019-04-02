@@ -37,6 +37,11 @@ if [ ! -x ~/.oh-my-zsh/custom/themes/spaceship-prompt ]; then
     ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 fi
 
+# Install zsh-nvm
+if [ ! -x  ~/.oh-my-zsh/custom/plugins/zsh-nvm ]; then
+    git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+fi
+
 # Install powerline fonts
 if [ ! -x ~/.oh-my-zsh/custom/fonts/powerline ]; then
     mkdir -p ~/.oh-my-zsh/custom/fonts
@@ -44,13 +49,10 @@ if [ ! -x ~/.oh-my-zsh/custom/fonts/powerline ]; then
     ~/.oh-my-zsh/custom/fonts/powerline/install.sh Hack
 fi
 
-# Install asdf
-if [ ! -x ~/.asdf ]; then
-    echo "Installing asdf..."
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-    sh -c 'cd ~/.asdf && git checkout "$(git describe --abbrev=0 --tags)"'
-    ~/.asdf/bin/asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-    bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+# Remove asdf
+if [ -x ~/.asdf ]; then
+    echo "Removing asdf..."
+    rm -rf ~/.asdf
 fi
 
 # Dotbot

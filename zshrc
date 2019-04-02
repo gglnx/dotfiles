@@ -16,13 +16,16 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-nvm)
 
 # Cache directory
 ZSH_COMPDUMP="${HOME}/.cache/zsh/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 
 # English, please
 export LANG=en_US.UTF-8
+
+# Use nvm autouse
+export NVM_AUTO_USE=true
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -55,7 +58,3 @@ export PATH="./vendor/bin:./node_modules/.bin:$PATH"
 
 # yarn global bin
 export PATH="$PATH:`yarn global bin`"
-
-# asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
