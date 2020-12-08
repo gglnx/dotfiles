@@ -7,9 +7,26 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# Find out macos version
+OLDIFS=$IFS
+IFS='.' read osvers_major osvers_minor osvers_dot_version <<< "$(/usr/bin/sw_vers -productVersion)"
+IFS=$OLDIFS
+
 # Update defaults
 echo "Updating defaults..."
 ./macos-defaults.sh
+
+# Accept XCode terms
+sudo xcodebuild -license accept
+
+# Install Rosetta
+if [[ ${osvers_major} -ge 11 ]]; then
+    if [[ $(arch) = 'arm64' ]]; then
+        if [[ ! -f "/Library/Apple/System/Library/LaunchDaemons/com.apple.oahd.plist" ]]; then
+            /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+        fi
+    fi
+fi
 
 # Install Homebrew (intel)
 if [ ! -x /usr/local/bin/brew ]; then
@@ -24,9 +41,6 @@ if [[ $(arch) = 'arm64' ]]; then
     sudo chown -R $(whoami):staff /opt/homebrew
     (cd /opt && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew)
 fi
-
-# Accept XCode terms
-sudo xcodebuild -license accept
 
 # Brew bundle
 echo "Install all Taps, Brews, Casks and Mas from Brewfile..."

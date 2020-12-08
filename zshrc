@@ -73,3 +73,6 @@ export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 # yarn global bin
 export PATH="$PATH:`yarn global bin`"
+
+# Rosetta
+alias rosetta="arch -x86_64 zsh"
