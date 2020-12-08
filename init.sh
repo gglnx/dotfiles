@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 # Ask for the administrator password upfront
@@ -12,10 +11,18 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo "Updating defaults..."
 ./macos-defaults.sh
 
-# Install Homebrew
+# Install Homebrew (intel)
 if [ ! -x /usr/local/bin/brew ]; then
-    echo "Installing Homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    echo "Installing x86 Homebrew..."
+    arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install Homebrew (apple slicon)
+if [[ $(arch) = 'arm64' ]]; then
+    echo "Installing arm64 Homebrew..."
+    sudo mkdir -p /opt/homebrew
+    sudo chown -R $(whoami):staff /opt/homebrew
+    (cd /opt && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew)
 fi
 
 # Accept XCode terms
@@ -28,12 +35,12 @@ brew bundle
 # Install oh-my-zsh
 if [ ! -x ~/.oh-my-zsh ]; then
     echo "Installing oh-my-zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Install spaceship
 if [ ! -x ~/.oh-my-zsh/custom/themes/spaceship-prompt ]; then
-    git clone https://github.com/denysdovhan/spaceship-prompt.git ~/.oh-my-zsh/custom/themes/spaceship-prompt
+    git clone https://github.com/denysdovhan/spaceship-prompt.git ~/.oh-my-zsh/custom/themes/spaceship-prompt --depth=1
     ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 fi
 

@@ -30,6 +30,27 @@ export NVM_AUTO_USE=true
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# Dotfiles
+export DOTFILES="$HOME/.dotfiles"
+
+# Brew
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+# nodejs/npm/yarn
+export NVM_AUTO_USE=true
+export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+export PATH="./node_modules/.bin:$PATH"
+export PATH="`yarn global bin`:$PATH"
+
+# Composer
+export PATH="./vendor/bin:$HOME/.composer/vendor/bin:$PATH"
+
+# Go
+export GOPATH="$HOME/.go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+
 # Preferred editor for local and remote sessions
 export EDITOR='nano'
 
@@ -38,23 +59,17 @@ alias ls="exa -la"
 alias la="exa -la"
 alias ll="exa -la"
 
+# Don't delete, trash it
+alias rm="trash"
+
 # Reload zsh
 alias zshreload="source ~/.zshrc"
 
-# Local bin
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:$HOME/.bin"
+# Symfony
+export PATH="$HOME/.symfony/bin:$PATH"
 
-# Composer
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
-# Transfer
-transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
-tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
-
-# Make bin folders in composer and npm projects directly available
-export PATH="./vendor/bin:./node_modules/.bin:$PATH"
+# Python3
+export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 # yarn global bin
 export PATH="$PATH:`yarn global bin`"

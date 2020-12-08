@@ -4,7 +4,7 @@
 
 [core]
 	editor = nano
-	excludesfile = /Users/dennis/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	autocrlf = input
 
 [alias]
@@ -59,9 +59,6 @@
 [difftool]
 	prompt = false
 
-[difftool "icdiff"]
-	cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE
-
 [pager]
 	difftool = true
 
@@ -70,3 +67,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[init]
+	defaultBranch = main
