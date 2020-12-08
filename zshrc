@@ -37,11 +37,19 @@ export DOTFILES="$HOME/.dotfiles"
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
-# nodejs/npm/yarn
+# nodejs/npm
 export NVM_AUTO_USE=true
-export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
 export PATH="./node_modules/.bin:$PATH"
-export PATH="`yarn global bin`:$PATH"
+
+# yarn
+if type "yarn" > /dev/null; then
+    export PATH="`yarn global bin`:$PATH"
+fi
+
+# mkcert
+if type "mkcert" > /dev/null; then
+    export NODE_EXTRA_CA_CERTS="$(mkcert -CAROOT)/rootCA.pem"
+fi
 
 # Composer
 export PATH="./vendor/bin:$HOME/.composer/vendor/bin:$PATH"
@@ -70,9 +78,6 @@ export PATH="$HOME/.symfony/bin:$PATH"
 
 # Python3
 export PATH="$HOME/Library/Python/3.7/bin:$PATH"
-
-# yarn global bin
-export PATH="$PATH:`yarn global bin`"
 
 # Rosetta
 alias rosetta="arch -x86_64 zsh"

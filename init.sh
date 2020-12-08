@@ -25,23 +25,18 @@ if [[ ${osvers_major} -ge 11 ]]; then
     fi
 fi
 
-# Install Homebrew (intel)
-if [ ! -x /usr/local/bin/brew ]; then
-    echo "Installing x86 Homebrew..."
-    arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# Dotbot
+CONFIG="install.conf.yaml"
+DOTBOT_DIR="dotbot"
 
-# Install Homebrew (apple slicon)
-if [[ $(arch) = 'arm64' ]]; then
-    echo "Installing arm64 Homebrew..."
-    sudo mkdir -p /opt/homebrew
-    sudo chown -R $(whoami):staff /opt/homebrew
-    (cd /opt && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew)
-fi
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Brew bundle
-echo "Install all Taps, Brews, Casks and Mas from Brewfile..."
-brew bundle
+cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
 # Install oh-my-zsh
 if [ ! -x ~/.oh-my-zsh ]; then
@@ -67,21 +62,29 @@ if [ ! -x ~/.oh-my-zsh/custom/fonts/powerline ]; then
     ~/.oh-my-zsh/custom/fonts/powerline/install.sh Hack
 fi
 
+# Source zsh
+source ~/.zshrc
+
+# Install Homebrew (intel)
+if [ ! -x /usr/local/bin/brew ]; then
+    echo "Installing x86 Homebrew..."
+    arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install Homebrew (apple slicon)
+if [[ $(arch) = 'arm64' ]]; then
+    echo "Installing arm64 Homebrew..."
+    sudo mkdir -p /opt/homebrew
+    sudo chown -R $(whoami):staff /opt/homebrew
+    (cd /opt && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew)
+fi
+
+# Brew bundle
+echo "Install all Taps, Brews, Casks and Mas from Brewfile..."
+brew bundle
+
 # Remove asdf
 if [ -x ~/.asdf ]; then
     echo "Removing asdf..."
     rm -rf ~/.asdf
 fi
-
-# Dotbot
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
