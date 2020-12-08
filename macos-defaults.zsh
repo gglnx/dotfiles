@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Theme and colors
 defaults write NSGlobalDomain AppleHighlightColor -string '0.847059 0.847059 0.862745'

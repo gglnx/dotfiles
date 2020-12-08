@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 set -e
 
 # Ask for the administrator password upfront
@@ -37,6 +37,9 @@ git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+
+# Set default shell
+chsh -s $(which zsh)
 
 # Install oh-my-zsh
 if [ ! -x ~/.oh-my-zsh ]; then
