@@ -16,9 +16,6 @@ IFS=$OLDIFS
 echo "Updating defaults..."
 ./macos-defaults.sh
 
-# Accept XCode terms
-sudo xcodebuild -license accept
-
 # Install Rosetta
 if [[ ${osvers_major} -ge 11 ]]; then
     if [[ $(arch) = 'arm64' ]]; then
