@@ -160,9 +160,6 @@ defaults write com.apple.TextEdit RichText -int 0
 # Don't show icons on Desktop
 defaults write com.apple.finder CreateDesktop -bool false
 
-# Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
 # Enable developer menu in Safari
 defaults write com.apple.Safari IncludeDebugMenu 1
 
