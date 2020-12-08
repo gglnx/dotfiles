@@ -62,7 +62,7 @@ fi
 if [ ! -x ~/.oh-my-zsh/custom/fonts/powerline ]; then
     mkdir -p ~/.oh-my-zsh/custom/fonts
     git clone https://github.com/powerline/fonts.git ~/.oh-my-zsh/custom/fonts/powerline
-    ~/.oh-my-zsh/custom/fonts/powerline/install.sh Hack
+    (~/.oh-my-zsh/custom/fonts/powerline/install.sh Hack)
 fi
 
 # Source zsh
