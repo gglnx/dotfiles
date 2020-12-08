@@ -14,7 +14,7 @@ IFS=$OLDIFS
 
 # Update defaults
 echo "Updating defaults..."
-./macos-defaults.sh
+./macos-defaults.zsh
 
 # Install Rosetta
 if [[ ${osvers_major} -ge 11 ]]; then
