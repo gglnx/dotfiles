@@ -35,6 +35,7 @@ brew "hcloud"
 brew "imagemagick"
 brew "jpegoptim"
 brew "jq"
+brew "mackup"
 brew "mailhog", restart_service: true
 brew "mas"
 brew "midnight-commander"

@@ -9,6 +9,9 @@
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore
+    ~/.mackup.cfg: mackup.cfg
+    ~/.mackup: config/mackup
 
 - shell:
     - [mkdir -p ~/.cache/zsh/, Create Cache directory for ZSH]
+    - [mackup restore, Restores application configuration]
