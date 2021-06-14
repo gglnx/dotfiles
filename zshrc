@@ -40,6 +40,8 @@ source "$DOTFILES/sections/rosetta.zsh"
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# iTerm
+source "$DOTFILES/includes/iterm2.zsh"
 
 # Brew
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
