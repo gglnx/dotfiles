@@ -89,11 +89,17 @@ alias zshreload="source ~/.zshrc"
 # Symfony
 export PATH="$HOME/.symfony/bin:$PATH"
 
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+
 # Python3
 export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 # Rosetta
 alias rosetta="arch -x86_64 zsh"
+
+# Flush DNS
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # Spaceship sections
 spaceship::insert_before_section() {
@@ -113,3 +119,24 @@ spaceship::insert_before_section rosetta battery
 # direnv
 eval "$(direnv hook zsh)"
 
+# Secret
+function secret {
+  output="$(basename ${1}).$(date +%F).enc"
+  gpg --encrypt --armor \
+    --output ${output} \
+    -r 0xB10EC2E20772A608 \
+    -r info@dennismorhardt.de \
+    "${1}" && echo "${1} -> ${output}"
+}
+
+# Reveal
+function reveal {
+  output=$(echo "${1}" | rev | cut -c16- | rev)
+  gpg --decrypt --output ${output} "${1}" \
+    && echo "${1} -> ${output}"
+}
+
+# Download
+function download {
+  rsync -lptgoD --progress ${1} .
+}
