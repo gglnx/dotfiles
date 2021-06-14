@@ -42,8 +42,11 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Brew
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+# Overwrite build-in utils
+PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
 
 # nodejs/npm
 export NVM_AUTO_USE=true
