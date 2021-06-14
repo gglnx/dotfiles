@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# dotfiles
+export DOTFILES="$HOME/.dotfiles"
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -21,17 +24,22 @@ plugins=(git zsh-nvm)
 # Cache directory
 ZSH_COMPDUMP="${HOME}/.cache/zsh/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 
+# Spaceship configuration
+SPACESHIP_ROSETTA_SHOW=true
+SPACESHIP_BATTERY_SHOW=true
+
 # English, please
 export LANG=en_US.UTF-8
 
 # Use nvm autouse
 export NVM_AUTO_USE=true
 
+# Spaceship sections
+source "$DOTFILES/sections/rosetta.zsh"
+
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# Dotfiles
-export DOTFILES="$HOME/.dotfiles"
 
 # Brew
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH"
@@ -81,3 +89,19 @@ export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 # Rosetta
 alias rosetta="arch -x86_64 zsh"
+
+# Spaceship sections
+spaceship::insert_before_section() {
+  local my_section="$1"
+  local other_section="$2"
+  local idx
+  idx=${SPACESHIP_PROMPT_ORDER[(i)${other_section}]}
+  SPACESHIP_PROMPT_ORDER=(
+    ${SPACESHIP_PROMPT_ORDER[0,$((idx-1))]}
+    ${my_section}
+    ${SPACESHIP_PROMPT_ORDER[${idx},$]}
+  )
+}
+
+spaceship::insert_before_section rosetta battery
+
