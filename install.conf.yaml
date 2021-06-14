@@ -1,9 +1,9 @@
 - defaults:
     link:
       relink: true
-      force: true
+      relative: true
 
-- clean: ['~']
+- clean: []
 
 - link:
     ~/.zshrc: zshrc
@@ -13,5 +13,7 @@
     ~/.mackup: config/mackup
 
 - shell:
+    - [brew bundle, Install all Taps, Brews, Casks and Apps from the Mac App Store]
     - [mkdir -p ~/.cache/zsh/, Create Cache directory for ZSH]
+    - [chsh -s $(which zsh), Making zsh the default shell]
     - [mackup restore, Restores application configuration]
