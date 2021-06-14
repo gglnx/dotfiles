@@ -105,3 +105,6 @@ spaceship::insert_before_section() {
 
 spaceship::insert_before_section rosetta battery
 
+# direnv
+eval "$(direnv hook zsh)"
+
